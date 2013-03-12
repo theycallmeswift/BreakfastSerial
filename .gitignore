@@ -1,0 +1,5 @@
+.DS_Store
+*~
+*.sw[a-z]
+*.pyc
+venv/
