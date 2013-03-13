@@ -81,7 +81,7 @@ class Monitor(threading.Thread):
       while self.board.bytes_available():
         self.board.iterate()
 
-      sleep(0.001)
+      sleep(0.004)
 
       if not self._shouldContinue:
         break
