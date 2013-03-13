@@ -120,3 +120,8 @@ for i in range(40):
 ```
 
 The `value` property of a `Sensor` object is the value of the underlying pin.
+
+### Moar!
+
+There are a bunch of examples in the `examples/` folder.  Additional components
+will be added over time, so be sure to check back regularly.
