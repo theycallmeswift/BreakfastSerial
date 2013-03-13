@@ -38,16 +38,24 @@ python setup.py install
 The breakfast_serial library provides a simple abstraction for a number of
 common components.  Make sure your arduino is plugged in and is running firmata.
 
+### Basic Usage
+
+There are a number of basic sensors and components that you can use with `breakfast_serial`.
+The most basic way to use the library is to let it auto-discover a connected Arduino.
+
+    board = Arduino() # This will autodiscover the device
+
 ### LED
 
-To use the led object, import Led from `breakfast_serial`.  The constructor takes a pin
-number as its only argument.
+To use the led object, import Led from `breakfast_serial`.  The constructor takes an
+Arduino object and a pin number as its only argument.
 
 ``` python
-from breakfast_serial import Led
-    
+from breakfast_serial import Arduino, Led
+
+board = Arduino()
 pin = 13
-led = Led(pin)
+led = Led(board, pin)
 ```
 
 #### Turing an led on and off
