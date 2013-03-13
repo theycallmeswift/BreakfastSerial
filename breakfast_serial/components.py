@@ -5,38 +5,18 @@ import pyfirmata
 class ArduinoNotSuppliedException(Exception):
   pass
 
-class Sensor(EventEmitter):
+class Component(EventEmitter):
 
   def __init__(self, board, pin):
     if not board:
       raise ArduinoNotSuppliedException
 
-    super(Sensor, self).__init__()
+    super(Component, self).__init__()
 
     self._board = board
     self._pin = self._board.digital[pin]
 
-class InputSensor(Sensor):
-
-  def __init__(self, board, pin):
-    super(InputSensor, self).__init__(board, pin)
-
-    self._pin.mode = pyfirmata.INPUT
-    self._pin.enable_reporting()
-    self._old_value = self._pin.value
-
-    self._board.on('data', self._update_old_value)
-
-  def _update_old_value(self):
-    value = self._pin.value
-
-    if self._old_value != value:
-      self._old_value = value
-      self._handle_state_change()
-
-  def _handle_state_change(self): pass
-
-class Led(Sensor):
+class Led(Component):
 
   def __init__(self, board, pin):
     super(Led, self).__init__(board, pin)
@@ -66,9 +46,26 @@ class Led(Sensor):
   def blink(self, millis):
     self._interval = setInterval(self.toggle, millis)
 
-class Button(InputSensor):
+class Button(Component):
 
-  def _handle_state_change(self):
+  def __init__(self, board, pin):
+    super(Button, self).__init__(board, pin)
+
+    self._pin.mode = pyfirmata.INPUT
+    self._pin.enable_reporting()
+
+    self._old_value = self._pin.value
+
+    self._board.on('data', self._handle_data)
+
+  def _handle_data(self):
+    value = self._pin.value
+
+    if self._old_value != value:
+      self._old_value = value
+      self._handle_state_changed()
+
+  def _handle_state_changed(self):
     if self._pin.value == False:
       self.emit('up')
     else:

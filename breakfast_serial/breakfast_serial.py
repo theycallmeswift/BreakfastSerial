@@ -37,7 +37,6 @@ class Arduino(pyfirmata.Arduino):
     self._monitor = Monitor(self)
 
   def _handle_digital_message_interceptor(self, port_nr, lsb, msb):
-    print "emitting"
     self._handle_digital_message(port_nr, lsb, msb)
     self.emit('data') # TODO: Make less generic
 
