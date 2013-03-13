@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 """
 This is an example that demonstrates how to use a
-button with breakfast_serial.  It assumes you have an
+button with BreakfastSerial.  It assumes you have an
 button wired up to pin 8.
 """
-from breakfast_serial import Button, Arduino
+from BreakfastSerial import Button, Arduino
 
 board = Arduino()
 button = Button(board, 8)

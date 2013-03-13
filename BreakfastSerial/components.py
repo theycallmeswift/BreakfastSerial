@@ -1,4 +1,4 @@
-from breakfast_serial import Arduino
+from BreakfastSerial import Arduino
 from util import EventEmitter, setInterval
 import pyfirmata, re
 

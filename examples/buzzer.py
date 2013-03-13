@@ -2,11 +2,11 @@
 """
 This is an example that demonstrates how to use a
 photoresistor to control a buzzer (piezo element)
-using breakfast_serial.  It assumes you have an
+using BreakfastSerial.  It assumes you have an
 photoresistor (or some equivalent analog input) 
 wired up to pin A0 and a buzzer on pin 8.
 """
-from breakfast_serial import Arduino, Buzzer, Sensor, setInterval
+from BreakfastSerial import Arduino, Buzzer, Sensor, setInterval
 from time import sleep
 
 board = Arduino()

@@ -1,10 +1,10 @@
-# breakfast_serial
+# BreakfastSerial
 
 A Firmata based framework for interacting with Arduinos over serial.
 
 ## Arduino Setup
 
-In order to use breakfast_serial, you need to have an arduino running the
+In order to use BreakfastSerial, you need to have an arduino running the
 standard firmata.
 
 1. Download the Arduino IDE from the arduino website
@@ -21,20 +21,20 @@ standard firmata.
 Using PyPi
 
 ``` bash
-pip install breakfast_serial
+pip install BreakfastSerial
 ```
 
 #### From Source
 
 ``` bash
-git clone git://github.com/theycallmeswift/breakfast_serial.git && cd breakfast_serial
+git clone git://github.com/theycallmeswift/BreakfastSerial.git && cd BreakfastSerial
 
 python setup.py install
 ```
 
 ## Getting Started
 
-The breakfast_serial library provides a simple abstraction for a number of
+The BreakfastSerial library provides a simple abstraction for a number of
 common components.  Make sure your arduino is plugged in and is running firmata.
 
 ### Board
@@ -44,17 +44,17 @@ the serial port that the Arduino is attached to and connect automatically.  Opti
 you can supply the path to a serial port (Ex. `"/dev/tty.usbmodem4111"`).
 
 ``` python
-from breakfast_serial import Board
+from BreakfastSerial import Board
 board = Arduino() # This will autodiscover the device
 ```
 
 ### Blink an LED
 
-To use the led object, import Led from `breakfast_serial`.  The constructor takes an
+To use the led object, import Led from `BreakfastSerial`.  The constructor takes an
 Arduino object and a pin number as its arguments.
 
 ``` python
-from breakfast_serial import Arduino, Led
+from BreakfastSerial import Arduino, Led
 from time import sleep
 
 board = Arduino()
@@ -80,7 +80,7 @@ The `Button` component has a number of helper methods that make it easy to work 
 The constructor takes an Arduino object and a pin number as its arguments.
 
 ``` python
-from breakfast_serial import Button, Arduino
+from BreakfastSerial import Button, Arduino
 
 board = Arduino()
 button = Button(board, 8)
@@ -107,7 +107,7 @@ The `Sensor` component let's us read in data from a sensor (analog or digital). 
 an Arduino object and a pin number.
  
 ``` python
-from breakfast_serial import Arduino, Sensor
+from BreakfastSerial import Arduino, Sensor
 from time import sleep
 
 board = Arduino()
