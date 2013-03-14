@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "BreakfastSerial",
-    version = "0.0.3",
+    version = "0.0.4",
     description = "Python Framework for interacting with Arduino",
     author = "Swift",
     author_email = "theycallmeswift@gmail.com",
