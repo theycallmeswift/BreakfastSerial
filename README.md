@@ -37,14 +37,14 @@ python setup.py install
 The BreakfastSerial library provides a simple abstraction for a number of
 common components.  Make sure your arduino is plugged in and is running firmata.
 
-### Board
+### Arduino
 
-If you create a `Board` object without any parameters, it will attempt to auto discover 
+If you create a `Arduino` object without any parameters, it will attempt to auto discover 
 the serial port that the Arduino is attached to and connect automatically.  Optionally,
 you can supply the path to a serial port (Ex. `"/dev/tty.usbmodem4111"`).
 
 ``` python
-from BreakfastSerial import Board
+from BreakfastSerial import Arduino
 board = Arduino() # This will autodiscover the device
 ```
 
