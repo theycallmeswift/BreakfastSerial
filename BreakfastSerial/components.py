@@ -62,6 +62,9 @@ class Led(Component):
       return self.on()
 
   def blink(self, millis):
+    if self._interval:
+      self._interval.clear()
+
     self._interval = setInterval(self.toggle, millis)
 
 class Buzzer(Led):

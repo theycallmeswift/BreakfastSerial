@@ -42,11 +42,9 @@ class setInterval(threading.Thread):
     self.start()
 
   def run(self):
-    self.func()
-    sleep(self.seconds)
-
-    if self.shouldRun:
-      self.run()
+    while self.shouldRun:
+      self.func()
+      sleep(self.seconds)
 
   def clear(self):
     self.shouldRun = False
