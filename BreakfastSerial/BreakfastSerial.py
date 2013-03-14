@@ -2,7 +2,7 @@ import os, re, code, threading, pyfirmata
 from time import sleep
 
 def find_arduino():
-  rport = re.compile('usb|acm')
+  rport = re.compile('usb|acm', re.IGNORECASE)
   ports = filter(rport.search, os.listdir('/dev'))
 
   if len(ports) == 0:
