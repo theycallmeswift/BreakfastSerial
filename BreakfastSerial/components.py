@@ -1,6 +1,6 @@
 from BreakfastSerial import Arduino
 from util import EventEmitter, setInterval, debounce
-import pyfirmata, re
+import pyfirmata, re, threading
 
 class ArduinoNotSuppliedException(Exception):
   pass
@@ -75,6 +75,7 @@ class Button(Sensor):
   def __init__(self, board, pin):
     super(Button, self).__init__(board, pin)
     self._old_value = self.value
+    self._timeout = None
 
     self._board.on('data', self._handle_data)
 
@@ -87,9 +88,19 @@ class Button(Sensor):
 
   @debounce(0.005)
   def _handle_state_changed(self):
+    self.emit('change')
     if self.value == False:
+      if(self._timeout):
+        self._timeout.cancel()
+
       self.emit('up')
-    else:
+    elif self.value == True:
+      def emit_hold():
+        self.emit('hold')
+
+      self._timeout = threading.Timer(1, emit_hold)
+      self._timeout.start()
+
       self.emit('down')
 
   def down(self, cb):
@@ -97,3 +108,6 @@ class Button(Sensor):
 
   def up(self, cb):
     self.on('up', cb)
+
+  def hold(self, cb):
+    self.on('hold', cb)

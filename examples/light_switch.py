@@ -12,6 +12,7 @@ button = Button(board, 8)
 led = Led(board, 13)
 
 button.down(led.toggle)
+button.hold(lambda: led.blink(200))
 
 # Run an interactive shell so you can play (not required)
 import code

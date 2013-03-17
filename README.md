@@ -98,8 +98,10 @@ button.up(up_cb)
 The `down` and `up` functions are just nice wrappers around the underlying event emitter.  The `Button`
 component emits the following events:
 
+ - `change` - The button value changed
  - `down` - The button is pressed
  - `up` - The button is not being pressed
+ - `hold` - The button was held for at least 1 second
  
 ### Read a sensor
  
