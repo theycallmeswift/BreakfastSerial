@@ -91,8 +91,12 @@ def down_cb():
 def up_cb():
   print "button up"
 
+def hold_cb():
+  print "button held"
+
 button.down(down_cb)
 button.up(up_cb)
+button.hold(hold_cb)
 ```
 
 The `down` and `up` functions are just nice wrappers around the underlying event emitter.  The `Button`
