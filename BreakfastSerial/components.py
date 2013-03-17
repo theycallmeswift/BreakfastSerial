@@ -1,5 +1,5 @@
 from BreakfastSerial import Arduino
-from util import EventEmitter, setInterval
+from util import EventEmitter, setInterval, debounce
 import pyfirmata, re
 
 class ArduinoNotSuppliedException(Exception):
@@ -85,6 +85,7 @@ class Button(Sensor):
       self._old_value = value
       self._handle_state_changed()
 
+  @debounce(0.005)
   def _handle_state_changed(self):
     if self.value == False:
       self.emit('up')
