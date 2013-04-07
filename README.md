@@ -126,6 +126,29 @@ for i in range(40):
 
 The `value` property of a `Sensor` object is the value of the underlying pin.
 
+### Control a servo
+ 
+The `Servo` component let's us control a servo.  The constructor takes in
+an Arduino object and a pin number.
+ 
+``` python
+from BreakfastSerial import Arduino, Servo
+from time import sleep
+
+board = Arduino()
+servo = Servo(board, "10")
+
+servo.set_position(180)
+sleep(2)
+servo.move(-135)
+sleep(2)
+servo.center()
+sleep(2)
+servo.reset()
+```
+
+The `value` property of a `Servo` object is the current position of the servo in degrees
+
 ### Moar!
 
 There are a bunch of examples in the `examples/` folder.  Additional components

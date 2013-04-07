@@ -5,6 +5,9 @@ import pyfirmata, re, threading
 class ArduinoNotSuppliedException(Exception):
   pass
 
+class ServoOutOfRangeException(Exception):
+  pass
+
 class Component(EventEmitter):
 
   def __init__(self, board, pin):
@@ -111,3 +114,23 @@ class Button(Sensor):
 
   def hold(self, cb):
     self.on('hold', cb)
+
+class Servo(Component):
+  
+  def __init__(self, board, pin):
+    super(Servo, self).__init__(board, pin)
+    self._pin.mode = pyfirmata.SERVO       
+
+  def set_position(self, degrees):
+    if int(degrees) > 180 or int(degrees) < 0:
+      raise ServoOutOfRangeException
+    self._pin.write(degrees)
+
+  def move(self, degrees):
+    self.set_position(self.value + int(degrees))
+    
+  def center(self):
+    self.set_position(90)
+
+  def reset(self):
+    self.set_position(0)
