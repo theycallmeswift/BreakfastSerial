@@ -70,6 +70,52 @@ class Led(Component):
 
     self._interval = setInterval(self.toggle, millis)
 
+class RGBLed(EventEmitter):
+
+  def __init__(self, board, pins):
+    if not board:
+      raise ArduinoNotSuppliedException
+
+    # TODO: Check that pins is dict
+
+    super(RGBLed, self).__init__()
+
+    self._red = Led(board, pins["red"])
+    self._green = Led(board, pins["green"])
+    self._blue = Led(board, pins["blue"])
+
+  def off(self):
+    self._red.off(); self._green.off(); self._blue.off()
+    return self
+
+  def red(self):
+    self._red.on(); self._green.off(); self._blue.off()
+    return self
+
+  def green(self):
+    self._red.off(); self._green.on(); self._blue.off()
+    return self
+
+  def blue(self):
+    self._red.off(); self._green.off(); self._blue.on()
+    return self
+
+  def yellow(self):
+    self._red.on(); self._green.on(); self._blue.off()
+    return self
+
+  def cyan(self):
+    self._red.off(); self._green.on(); self._blue.on()
+    return self
+
+  def purple(self):
+    self._red.on(); self._green.off(); self._blue.on()
+    return self
+
+  def white(self):
+    self._red.on(); self._green.on(); self._blue.on()
+    return self
+
 class Buzzer(Led):
   pass
 
@@ -116,10 +162,10 @@ class Button(Sensor):
     self.on('hold', cb)
 
 class Servo(Component):
-  
+
   def __init__(self, board, pin):
     super(Servo, self).__init__(board, pin)
-    self._pin.mode = pyfirmata.SERVO       
+    self._pin.mode = pyfirmata.SERVO
 
   def set_position(self, degrees):
     if int(degrees) > 180 or int(degrees) < 0:
@@ -128,7 +174,7 @@ class Servo(Component):
 
   def move(self, degrees):
     self.set_position(self.value + int(degrees))
-    
+
   def center(self):
     self.set_position(90)
 

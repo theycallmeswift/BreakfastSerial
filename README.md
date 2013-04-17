@@ -64,7 +64,6 @@ led = Led(board, pin)
 led.on()
 sleep(2)
 led.off()
-sleep(2)
 ```
 
 You can also use the `blink` method and pass it a number of milliseconds to automate the blinking process
@@ -106,10 +105,46 @@ component emits the following events:
  - `down` - The button is pressed
  - `up` - The button is not being pressed
  - `hold` - The button was held for at least 1 second
- 
+
+### Use an RGB Led
+
+The `RGBLed` component lets us change the colors of an RGB Led without having to
+interact with the three underlying leds.
+
+```python
+from BreakfastSerial import Arduino, RGBLed
+from time import sleep
+
+board = Arduino()
+led = RGBLed(board, { "red": 10, "green": 9, "blue": 8 })
+
+led.red()
+sleep(1)
+
+led.green()
+sleep(1)
+
+led.blue()
+sleep(1)
+
+led.yellow()
+sleep(1)
+
+led.cyan()
+sleep(1)
+
+led.purple()
+sleep(1)
+
+led.white()
+sleep(1)
+
+led.off()
+```
+
 ### Read a sensor
  
-The `Sensor` component let's us read in data from a sensor (analog or digital).  The constructor takes in
+The `Sensor` component lets us read in data from a sensor (analog or digital).  The constructor takes in
 an Arduino object and a pin number.
  
 ``` python
