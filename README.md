@@ -188,3 +188,5 @@ The `value` property of a `Servo` object is the current position of the servo in
 
 There are a bunch of examples in the `examples/` folder.  Additional components
 will be added over time, so be sure to check back regularly.
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/c3bf610a9c47da4e52190bf67b5d953c "githalytics.com")](http://githalytics.com/theycallmeswift/BreakfastSerial)
