@@ -40,7 +40,6 @@ class Sensor(Component):
     self._pin.enable_reporting()
 
     self._old_value = self.value
-    print self._old_value
     self._board.on('data', self._handle_data)
 
   def _handle_data(self):
@@ -159,21 +158,20 @@ class Button(Sensor):
 
   def __init__(self, board, pin):
     super(Button, self).__init__(board, pin)
-    self._old_value = self.value
+    self._old_value = False
     self._timeout = None
 
-    self._board.on('data', self._handle_data)
+    self.change(self._emit_button_events)
 
   def _handle_data(self):
     value = self.value
 
     if self._old_value != value:
       self._old_value = value
+      # This sucks, wish I could just call Super
       self._handle_state_changed()
 
-  @debounce(0.005)
-  def _handle_state_changed(self):
-    self.emit('change')
+  def _emit_button_events(self):
     if self.value == False:
       if(self._timeout):
         self._timeout.cancel()
