@@ -91,6 +91,20 @@ class Led(Component):
 
     self._interval = setInterval(self.toggle, millis)
 
+  def brightness(self, value):
+    if self._pin.mode != pyfirmata.PWM:
+      self._pin.mode = pyfirmata.PWM
+
+    _new_value = value / 255.0
+
+    if _new_value == 0:
+      self._isOn = False
+    else:
+      self.isOn = True
+
+    self._pin.write(_new_value)
+    return self
+
 class RGBLed(EventEmitter):
 
   def __init__(self, board, pins):

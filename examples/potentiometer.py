@@ -1,18 +1,20 @@
 #! /usr/bin/env python
 """
 This is an example that demonstrates how to use a
-potentiometer with BreakfastSerial.  It assumes you 
-have an potentiometer wired up to pin A0.
+potentiometer to fade an LED with BreakfastSerial.
+It assumes you have an potentiometer wired up to
+pin A0 and a LED on pin 9.
 """
-from BreakfastSerial import Sensor, Arduino
+from BreakfastSerial import Arduino, Sensor, Led
 
 board = Arduino()
 sensor = Sensor(board, "A0")
+led = Led(board, 9)
 
-def print_value():
-  print sensor.value
+def change_led_brightness():
+  led.brightness(255 * sensor.value)
 
-sensor.change(print_value)
+sensor.change(change_led_brightness)
 
 # Run an interactive shell so you can play (not required)
 import code

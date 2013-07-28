@@ -142,6 +142,24 @@ sleep(1)
 led.off()
 ```
 
+### LED Brightness
+
+You can set the brightness of an LED with the `brightness` function.  The LED
+must be on a PWM capable pin or it will throw and error.
+
+```python
+from BreakfastSerial import Arduino, Led
+from time import sleep
+
+board = Arduino()
+pin = 9
+led = Led(board, pin)
+
+for x in range(0, 255):
+  led.brightness(x)
+  sleep(0.01)
+```
+
 ### Read a sensor
 
 The `Sensor` component lets us read in data from a sensor (analog or digital).  The constructor takes in
