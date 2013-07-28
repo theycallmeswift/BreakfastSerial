@@ -180,7 +180,7 @@ sensor.change(print_value)
 The `Sensor` object has the following properties:
 
  - `threshold` - the amount `value` must change by to trigger a `change`
-   event (Default: `0.001`)
+   event (Default: `0.01`)
  - `value` - the value of the underlying pin
 
 The `change` function is just a nice wrapper around the underlying event emitter.  The `Sensor`

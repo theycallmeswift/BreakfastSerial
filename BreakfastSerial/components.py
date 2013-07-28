@@ -34,16 +34,17 @@ class Sensor(Component):
   def __init__(self, board, pin):
     super(Sensor, self).__init__(board, pin)
 
-    self.threshold = 0.001
+    self.threshold = 0.01
 
     self._pin.mode = pyfirmata.INPUT
     self._pin.enable_reporting()
 
     self._old_value = self.value
+    print self._old_value
     self._board.on('data', self._handle_data)
 
   def _handle_data(self):
-    value = self.value
+    value = self.value or 0
     high_value = value + self.threshold
     low_value = value - self.threshold
 
