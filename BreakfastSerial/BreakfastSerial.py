@@ -34,10 +34,15 @@ class Arduino(pyfirmata.Arduino):
 
     # Register a new handler for digital messages so we can tell sensors to update
     self.add_cmd_handler(pyfirmata.DIGITAL_MESSAGE, self._handle_digital_message_interceptor)
+    self.add_cmd_handler(pyfirmata.ANALOG_MESSAGE, self._handle_analog_message_interceptor)
     self._monitor = Monitor(self)
 
   def _handle_digital_message_interceptor(self, port_nr, lsb, msb):
     self._handle_digital_message(port_nr, lsb, msb)
+    self.emit('data') # TODO: Make less generic
+
+  def _handle_analog_message_interceptor(self, port_nr, lsb, msb):
+    self._handle_analog_message(port_nr, lsb, msb)
     self.emit('data') # TODO: Make less generic
 
   # TODO: Make generic eventemitter class and inherit

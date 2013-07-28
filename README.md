@@ -143,23 +143,32 @@ led.off()
 ```
 
 ### Read a sensor
- 
+
 The `Sensor` component lets us read in data from a sensor (analog or digital).  The constructor takes in
 an Arduino object and a pin number.
- 
+
 ``` python
 from BreakfastSerial import Arduino, Sensor
-from time import sleep
 
 board = Arduino()
 sensor = Sensor(board, "A0")
 
-for i in range(40):
+def print_value():
   print sensor.value
-  sleep(0.5)
+
+sensor.change(print_value)
 ```
 
-The `value` property of a `Sensor` object is the value of the underlying pin.
+The `Sensor` object has the following properties:
+
+ - `threshold` - the amount `value` must change by to trigger a `change`
+   event (Default: `0.001`)
+ - `value` - the value of the underlying pin
+
+The `change` function is just a nice wrapper around the underlying event emitter.  The `Sensor`
+component emits the following events:
+
+ - `change` - The sensor value change by at least the amount of `threshold`
 
 ### Control a servo
  

@@ -34,8 +34,29 @@ class Sensor(Component):
   def __init__(self, board, pin):
     super(Sensor, self).__init__(board, pin)
 
+    self.threshold = 0.001
+
     self._pin.mode = pyfirmata.INPUT
     self._pin.enable_reporting()
+
+    self._old_value = self.value
+    self._board.on('data', self._handle_data)
+
+  def _handle_data(self):
+    value = self.value
+    high_value = value + self.threshold
+    low_value = value - self.threshold
+
+    if self._old_value < low_value or self._old_value > high_value:
+      self._old_value = value
+      self._handle_state_changed()
+
+  @debounce(0.005)
+  def _handle_state_changed(self):
+    self.emit('change')
+
+  def change(self, cb):
+    self.on('change', cb)
 
 class Led(Component):
 
