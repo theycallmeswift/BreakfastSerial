@@ -220,3 +220,29 @@ class Servo(Component):
 
   def reset(self):
     self.set_position(0)
+
+class Motor(Component):
+
+  def __init__(self, board, pin):
+    super(Motor, self).__init__(board, pin)
+    self._speed = 0
+    self._pin.mode = pyfirmata.PWM
+
+  def start(self, speed=50):
+    self.speed = speed
+
+  def stop(self):
+    self.speed = 0
+
+  @property
+  def speed(self):
+    return self._speed
+
+  @speed.setter
+  def speed(self, speed):
+    if int(speed) > 100 or int(speed) < 0:
+      raise InvalidPercentageException
+
+    self._speed = speed
+    self._pin.write(speed / 100.0)
+    self.emit('change', speed)

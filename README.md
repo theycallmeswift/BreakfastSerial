@@ -212,6 +212,29 @@ servo.reset()
 
 The `value` property of a `Servo` object is the current position of the servo in degrees
 
+### Control a DC Motor
+ 
+The `Motor` component let's us control a DC Motor.  The constructor takes in
+an Arduino object and a pin number.  The motor must be on a PWM capable pin.
+ 
+``` python
+from BreakfastSerial import Arduino, Motor
+from time import sleep
+
+board = Arduino()
+motor = Motor(board, 9)
+
+motor.start(80)
+sleep(2)
+motor.speed = 50
+sleep(2)
+motor.stop()
+```
+
+The `speed` property is represented in a percentage of max speed.  So, `speed
+= 80` is setting the motor to 80% speed.  Setting `speed` equal to `0` is the 
+same as calling `stop()`.
+
 ### Moar!
 
 There are a bunch of examples in the `examples/` folder.  Additional components
