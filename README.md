@@ -7,11 +7,7 @@ A Firmata based framework for interacting with Arduinos over serial.
 In order to use BreakfastSerial, you need to have an arduino running the
 standard firmata.
 
-1. Download the Arduino IDE from the arduino website
-  - [OSX](http://arduino.googlecode.com/files/arduino-1.0-macosx.zip)
-  - [Linux 32 bit](http://arduino.googlecode.com/files/arduino-1.0-linux.tgz)
-  - [Linux 64 bit](http://arduino.googlecode.com/files/arduino-1.0-linux64.tgz)
-  - Windows support coming soon.
+1. Download the Arduino IDE from the arduino website ([http://arduino.cc/en/Main/Software](http://arduino.cc/en/Main/Software))
 2. Plug in your Arduino or Arduino compatible microcontroller via USB
 3. Open the Arduino IDE, select: File > Examples > Firmata > StandardFirmata
 4. Click the "Upload" button.

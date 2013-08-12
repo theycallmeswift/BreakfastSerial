@@ -1,15 +1,16 @@
-import os, re, code, threading, pyfirmata
+import serial.tools.list_ports, code, threading, pyfirmata
 from time import sleep
 
 def find_arduino():
-  rport = re.compile('usb|acm', re.IGNORECASE)
-  ports = filter(rport.search, os.listdir('/dev'))
+  possible_ports = serial.tools.list_ports.grep('usb|acm|com')
 
-  if len(ports) == 0:
-    raise ArduinoNotFoundException
+  try:
+    port = possible_ports.next()[0]
 
-  print "Connecting to /dev/%s" % ports[0]
-  return "/dev/%s" % ports[0]
+    print "Connecting to %s" % port
+    return port
+  except StopIteration as e:
+    raise ArduinoNotFoundException()
 
 class ArduinoNotFoundException(Exception):
   pass
