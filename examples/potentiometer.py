@@ -12,7 +12,7 @@ sensor = Sensor(board, "A0")
 led = Led(board, 9)
 
 def change_led_brightness():
-  led.brightness(255 * sensor.value)
+  led.brightness(100 * sensor.value)
 
 sensor.change(change_led_brightness)
 

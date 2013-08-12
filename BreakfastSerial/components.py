@@ -8,6 +8,9 @@ class ArduinoNotSuppliedException(Exception):
 class ServoOutOfRangeException(Exception):
   pass
 
+class InvalidPercentageException(Exception):
+  pass
+
 class Component(EventEmitter):
 
   def __init__(self, board, pin):
@@ -92,10 +95,13 @@ class Led(Component):
     self._interval = setInterval(self.toggle, millis)
 
   def brightness(self, value):
+    if int(value) > 100 or int(value) < 0:
+      raise InvalidPercentageException
+
     if self._pin.mode != pyfirmata.PWM:
       self._pin.mode = pyfirmata.PWM
 
-    _new_value = value / 255.0
+    _new_value = value / 100.0
 
     if _new_value == 0:
       self._isOn = False

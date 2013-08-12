@@ -145,7 +145,8 @@ led.off()
 ### LED Brightness
 
 You can set the brightness of an LED with the `brightness` function.  The LED
-must be on a PWM capable pin or it will throw and error.
+must be on a PWM capable pin or it will throw and error.  Brightness is
+measured on a scale of 0% to 100%.
 
 ```python
 from BreakfastSerial import Arduino, Led
@@ -155,7 +156,7 @@ board = Arduino()
 pin = 9
 led = Led(board, pin)
 
-for x in range(0, 255):
+for x in range(0, 100):
   led.brightness(x)
   sleep(0.01)
 ```
