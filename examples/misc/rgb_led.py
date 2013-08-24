@@ -2,14 +2,14 @@
 """
 This is an example that demonstrates how to use an
 RGB led with BreakfastSerial.  It assumes you have an
-RGB led wired up with red on pin 10, green on pin 9,
-and blue on pin 8.
+RGB led wired up with red on pin 9, green on pin 10,
+and blue on pin 11.
 """
 from BreakfastSerial import RGBLed, Arduino
 from time import sleep
 
 board = Arduino()
-led = RGBLed(board, { "red": 10, "green": 9, "blue": 8 })
+led = RGBLed(board, { "red": 9, "green": 10, "blue": 11 })
 
 # Red (R: on, G: off, B: off)
 led.red()

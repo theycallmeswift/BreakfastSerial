@@ -1,6 +1,7 @@
 from BreakfastSerial import Arduino
 from util import EventEmitter, setInterval, debounce
 import pyfirmata, re, threading
+from time import sleep
 
 class ArduinoNotSuppliedException(Exception):
   pass
@@ -167,6 +168,7 @@ class Button(Sensor):
     self._old_value = False
     self._timeout = None
 
+    sleep(0.05)
     self.change(self._emit_button_events)
 
   def _handle_data(self):

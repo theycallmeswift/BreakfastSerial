@@ -9,7 +9,7 @@ from BreakfastSerial import Led, Arduino
 board = Arduino()
 led = Led(board, 13)
 
-led.blink(200)
+led.blink(1000)
 
 # Run an interactive shell so you can play (not required)
 import code

@@ -19,4 +19,3 @@ sensor.change(change_led_brightness)
 # Run an interactive shell so you can play (not required)
 import code
 code.InteractiveConsole(locals=globals()).interact()
-
